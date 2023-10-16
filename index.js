@@ -26,7 +26,7 @@ let videos = [
 ]
 
 //create first api
-//  http://localhost:1234/youtube/welcome
+//  GET http://localhost:1234/youtube/welcome
 // API endpoint -> /youtube/welcome
 // API URL ->  http://localhost:1234/youtube/welcome
 app.get("/youtube/welcome", (request, response)=>{
@@ -36,7 +36,7 @@ app.get("/youtube/welcome", (request, response)=>{
 })
 
 //create second api
-//  http://localhost:1234/youtube/welcome
+//  POST http://localhost:1234/youtube/welcome
 // API endpoint -> /youtube/welcome
 // API URL ->  http://localhost:1234/youtube/welcome
 app.post("/youtube/welcome", (request, response)=>{
@@ -56,6 +56,12 @@ app.get("/youtube/all", (request,response)=>{
 
 /*
 POST http://localhost:1234/youtube/add
+request body 
+{
+    "id":1,
+    "videoid":"OI0F-zEhPJw",
+    "title":"Kantara"
+}
 */
 app.post("/youtube/add", (request, response)=>{
     console.log("endpoint called: /youtube/add with POST request")
