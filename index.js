@@ -1,6 +1,8 @@
 //import express
 
 let expressApp = require('express')
+let mongoose = require('mongoose')
+let prog = require ('./programming')
 
 //create express app
 let app = expressApp()
@@ -24,6 +26,18 @@ let videos = [
         "title":"Something"
     }
 ]
+
+//setup connection string
+let connectionString = "mongodb+srv://mongodbuser:mongopassword@cluster0.nezoluq.mongodb.net/youtubedb"
+//use connectionString to connect to db
+mongoose.connect(connectionString)
+let db = mongoose.connection
+
+//check if connection was success
+db.once('open',()=>{
+    console.log("Connected to the mongodb in cloud")
+})
+
 
 //create first api
 //  GET http://localhost:1234/youtube/welcome
@@ -51,7 +65,17 @@ GET http://localhost:1234/youtube/all
 */
 app.get("/youtube/all", (request,response)=>{
     console.log("endpoint called: /youtube/all with GET request")
-    response.send(videos)
+    //response.send(videos)
+    //connect to mongodb in cloud and get all documents
+    prog.find({})
+        .then((data)=>{
+            console.log(data)
+            response.json(data)
+        })
+        .catch((error)=>{
+            console.log(error)
+            response.json(error)
+        })
 })
 
 /*
