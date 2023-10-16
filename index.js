@@ -47,16 +47,37 @@ app.post("/youtube/welcome", (request, response)=>{
 
 
 /*
-http://localhost:1234/youtube/all
+GET http://localhost:1234/youtube/all
 */
 app.get("/youtube/all", (request,response)=>{
     console.log("endpoint called: /youtube/all with GET request")
     response.send(videos)
 })
 
+/*
+POST http://localhost:1234/youtube/add
+*/
+app.post("/youtube/add", (request, response)=>{
+    console.log("endpoint called: /youtube/add with POST request")
+    //console.log(request)
+    console.log(request.url)
+    console.log(request.method)
+    console.log(request.body)
+    //add or push the value in request.body to videos array
+    videos.push(request.body)
+    //send back the updated videos array as response
+    response.send(videos)
+})
 
 //start/fire api at given port
 app.listen(PORT, ()=>{
     console.log("Listening to port: " + PORT)
 })
 
+/*
+GET -> retrive the resource
+POST -> add the new resource
+PUT -> update the resource
+DELETE -> delete the resource
+
+*/
